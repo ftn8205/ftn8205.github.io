@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ian.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ian.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -22,10 +22,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="Backend Engineer">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Ian&#39;s Blog">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Ian&#39;s Blog">
+<meta property="og:description" content="Backend Engineer">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Ian">
 <meta name="twitter:card" content="summary">
@@ -116,11 +118,6 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
@@ -196,7 +193,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/image.png">
       <meta itemprop="name" content="Ian">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="Backend Engineer">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -216,10 +213,33 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-11-14 18:20:53 / Modified: 18:21:06" itemprop="dateCreated datePublished" datetime="2021-11-14T18:20:53+08:00">2021-11-14</time>
+              <time title="Created: 2021-11-14 18:20:53 / Modified: 21:32:01" itemprop="dateCreated datePublished" datetime="2021-11-14T18:20:53+08:00">2021-11-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Backend/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
+                </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
 
         </div>
       </header>
@@ -230,7 +250,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Hihihi</p>
+          <h2 id="Golang-筆記"><a href="#Golang-筆記" class="headerlink" title="Golang 筆記"></a>Golang 筆記</h2><h3 id="Benchmark-test"><a href="#Benchmark-test" class="headerlink" title="Benchmark test"></a>Benchmark test</h3><ul>
+<li>go test -bench=.</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkRepeat</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">		Repeat(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="子測試"><a href="#子測試" class="headerlink" title="子測試"></a>子測試</h3><ul>
+<li>Helper function會跟golang説這個函數是輔助函數，如果有報錯，應該要到程式碼中去找</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestHello</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    assertCorrectMessage := <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T, got, want <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">        t.Helper()</span><br><span class="line">        <span class="keyword">if</span> got != want &#123;</span><br><span class="line">            t.Errorf(<span class="string">&quot;got &#x27;%q&#x27; want &#x27;%q&#x27;&quot;</span>, got, want)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    t.Run(<span class="string">&quot;saying hello to people&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        got := Hello(<span class="string">&quot;Chris&quot;</span>)</span><br><span class="line">        want := <span class="string">&quot;Hello, Chris&quot;</span></span><br><span class="line">        assertCorrectMessage(t, got, want)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    t.Run(<span class="string">&quot;empty string defaults to &#x27;world&#x27;&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        got := Hello(<span class="string">&quot;&quot;</span>)</span><br><span class="line">        want := <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">        assertCorrectMessage(t, got, want)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="table-driven-test"><a href="#table-driven-test" class="headerlink" title="table-driven test"></a>table-driven test</h3><ul>
+<li>Create the expected results and input values in a map.</li>
+<li>t.Run all the cases in the map and assert/require the returned values with expected values.</li>
+<li>測試一個接口的不同實現(測試Shape的area，shape包含circle, triangle…)，或者是傳入函數的資料有很多種不同的測試需求</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsStrExist</span><span class="params">(slice []<span class="keyword">string</span>, find <span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> slice &#123;</span><br><span class="line">		<span class="keyword">if</span> v == find &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// non-table driven method</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIsStrExistSimple</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	ok := IsStrExist([]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.True(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist([]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist([]<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist(<span class="literal">nil</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// table driven method</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIsStrExist</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	tests := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">struct</span> &#123;</span><br><span class="line">		slice []<span class="keyword">string</span></span><br><span class="line">		find  <span class="keyword">string</span></span><br><span class="line">		want  <span class="keyword">bool</span></span><br><span class="line">	</span><br><span class="line">	&#125;&#123;</span><br><span class="line">		<span class="string">&quot;find&quot;</span>:    &#123;[]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;a&quot;</span>, <span class="literal">true</span>&#125;,</span><br><span class="line">		<span class="string">&quot;notfind&quot;</span>: &#123;[]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;c&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">		<span class="string">&quot;empty&quot;</span>:   &#123;[]<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;a&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">		<span class="string">&quot;nil&quot;</span>:     &#123;<span class="literal">nil</span>, <span class="string">&quot;a&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> name, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		t.Run(name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        	got := IsStrExist(tt.slice, tt.find)</span><br><span class="line">			require.EqualValues(t, tt.want, got)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Testify"><a href="#Testify" class="headerlink" title="Testify"></a>Testify</h3><ul>
+<li>assert  (“github.com/stretchr/testify/assert”) 失敗時，會繼續進行</li>
+<li>require (“github.com/stretchr/testify/require”) 失敗時，會直接終止程式</li>
+<li>mock (“github.com/stretchr/testify/mock”) 用來mock</li>
+</ul>
+<p>Testify framework 提供了suite，可以讓我們在每個測試前後做一些事情，例如初始化資料庫，清空資料庫等等操作。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ExampleTestSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">  suite.Suite</span><br><span class="line">  Variable <span class="keyword">int</span> <span class="comment">// 還可以需告全域變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每個測試前會調用這個function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">SetupTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">  suite.Variable = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test case</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">TestExample</span><span class="params">()</span></span> &#123;</span><br><span class="line">  assert.Equal(sutie.T(), <span class="number">5</span>, suite.Variable)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 讓go test跑這些Suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestExampleTestSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">  suite.Run(t, <span class="built_in">new</span>(exampleTestSuite))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每個測試執行後都會呼叫這個function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">TearDownTest</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="go-test-指令"><a href="#go-test-指令" class="headerlink" title="go test 指令"></a>go test 指令</h3><p>go test -v wechat_test.go wechat.go 跑某一個測試的檔案，要把原檔案也寫進去</p>
+<p>go test -v  跑這個資料夾中所有測試的檔案裡的所有測試</p>
+<p>go test -run TestSuiteDaasClientImpl/Test_GetProject_Fail -v  單跑一個測試</p>
+<p>go test -run Test_SetUpMetaConfig/Test_SetUpMetaConfig_Success/Success -v 跑一個測試中的子測試 (Success)</p>
+<h3 id="goMock-套件"><a href="#goMock-套件" class="headerlink" title="goMock 套件"></a>goMock 套件</h3><p>GoMock是由Golang官方開發維護的測試框架，實現了較為完整的基於interface的Mock功能，能夠與Golang內建的testing包良好整合，也能用於其它的測試環境中</p>
+<p>GoMock測試框架包含了GoMock包和mockgen工具兩部分，其中GoMock包完成對樁物件生命週期的管理，mockgen工具用來生成interface對應的Mock類原始檔，如果檔案中沒有interface，那產出來的Mock檔就會是空的。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a target="_blank" rel="noopener" href="https://goinbigdata.com/testing-go-code-with-testify/">https://goinbigdata.com/testing-go-code-with-testify/</a></p>
+<p><a target="_blank" rel="noopener" href="https://hackmd.io/5FTTkQb_QCOz6j43Moimuw?view#go-mock-usage">https://hackmd.io/5FTTkQb_QCOz6j43Moimuw?view#go-mock-usage</a></p>
 
       
     </div>
@@ -255,7 +315,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/image.png">
       <meta itemprop="name" content="Ian">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="Backend Engineer">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -287,7 +347,21 @@
                 </span>
             </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>367</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
 
         </div>
       </header>
@@ -387,7 +461,7 @@
     <img class="site-author-image" itemprop="image" alt="Ian"
       src="/images/image.png">
   <p class="site-author-name" itemprop="name">Ian</p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">Backend Engineer</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -401,13 +475,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -417,7 +491,7 @@
         <a href="https://github.com/ftn8205" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ftn8205" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
-        <a href="/ftn8205@gmail.com" title="E-Mail → ftn8205@gmail.com"><i class="fa fa-envelope fa-fw"></i></a>
+        <a href="mailto:ftn8205@gmail.com" title="E-Mail → mailto:ftn8205@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.facebook.com/profile.php?id=100000159971197" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100000159971197" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
@@ -481,14 +555,46 @@
   &copy; 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class=""></i>
+    <i class="fas fa-user-alt"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">By Ian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">4k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">3 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 

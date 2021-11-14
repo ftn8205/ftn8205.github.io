@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>post</title>
+    <url>/2021/11/14/post/</url>
+    <content><![CDATA[<h2 id="Golang-筆記"><a href="#Golang-筆記" class="headerlink" title="Golang 筆記"></a>Golang 筆記</h2><h3 id="Benchmark-test"><a href="#Benchmark-test" class="headerlink" title="Benchmark test"></a>Benchmark test</h3><ul>
+<li>go test -bench=.</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkRepeat</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">		Repeat(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="子測試"><a href="#子測試" class="headerlink" title="子測試"></a>子測試</h3><ul>
+<li>Helper function會跟golang説這個函數是輔助函數，如果有報錯，應該要到程式碼中去找</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestHello</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    assertCorrectMessage := <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T, got, want <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">        t.Helper()</span><br><span class="line">        <span class="keyword">if</span> got != want &#123;</span><br><span class="line">            t.Errorf(<span class="string">&quot;got &#x27;%q&#x27; want &#x27;%q&#x27;&quot;</span>, got, want)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    t.Run(<span class="string">&quot;saying hello to people&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        got := Hello(<span class="string">&quot;Chris&quot;</span>)</span><br><span class="line">        want := <span class="string">&quot;Hello, Chris&quot;</span></span><br><span class="line">        assertCorrectMessage(t, got, want)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    t.Run(<span class="string">&quot;empty string defaults to &#x27;world&#x27;&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        got := Hello(<span class="string">&quot;&quot;</span>)</span><br><span class="line">        want := <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">        assertCorrectMessage(t, got, want)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="table-driven-test"><a href="#table-driven-test" class="headerlink" title="table-driven test"></a>table-driven test</h3><ul>
+<li>Create the expected results and input values in a map.</li>
+<li>t.Run all the cases in the map and assert/require the returned values with expected values.</li>
+<li>測試一個接口的不同實現(測試Shape的area，shape包含circle, triangle…)，或者是傳入函數的資料有很多種不同的測試需求</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsStrExist</span><span class="params">(slice []<span class="keyword">string</span>, find <span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> slice &#123;</span><br><span class="line">		<span class="keyword">if</span> v == find &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// non-table driven method</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIsStrExistSimple</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	ok := IsStrExist([]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.True(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist([]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist([]<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">	ok = IsStrExist(<span class="literal">nil</span>, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">	require.False(t, ok)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// table driven method</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestIsStrExist</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	</span><br><span class="line">	tests := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">struct</span> &#123;</span><br><span class="line">		slice []<span class="keyword">string</span></span><br><span class="line">		find  <span class="keyword">string</span></span><br><span class="line">		want  <span class="keyword">bool</span></span><br><span class="line">	</span><br><span class="line">	&#125;&#123;</span><br><span class="line">		<span class="string">&quot;find&quot;</span>:    &#123;[]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;a&quot;</span>, <span class="literal">true</span>&#125;,</span><br><span class="line">		<span class="string">&quot;notfind&quot;</span>: &#123;[]<span class="keyword">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>&#125;, <span class="string">&quot;c&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">		<span class="string">&quot;empty&quot;</span>:   &#123;[]<span class="keyword">string</span>&#123;&#125;, <span class="string">&quot;a&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">		<span class="string">&quot;nil&quot;</span>:     &#123;<span class="literal">nil</span>, <span class="string">&quot;a&quot;</span>, <span class="literal">false</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span> name, tt := <span class="keyword">range</span> tests &#123;</span><br><span class="line">		t.Run(name, <span class="function"><span class="keyword">func</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">        	got := IsStrExist(tt.slice, tt.find)</span><br><span class="line">			require.EqualValues(t, tt.want, got)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Testify"><a href="#Testify" class="headerlink" title="Testify"></a>Testify</h3><ul>
+<li>assert  (“github.com/stretchr/testify/assert”) 失敗時，會繼續進行</li>
+<li>require (“github.com/stretchr/testify/require”) 失敗時，會直接終止程式</li>
+<li>mock (“github.com/stretchr/testify/mock”) 用來mock</li>
+</ul>
+<p>Testify framework 提供了suite，可以讓我們在每個測試前後做一些事情，例如初始化資料庫，清空資料庫等等操作。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> ExampleTestSuite <span class="keyword">struct</span> &#123;</span><br><span class="line">  suite.Suite</span><br><span class="line">  Variable <span class="keyword">int</span> <span class="comment">// 還可以需告全域變數</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每個測試前會調用這個function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">SetupTest</span><span class="params">()</span></span> &#123;</span><br><span class="line">  suite.Variable = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// test case</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">TestExample</span><span class="params">()</span></span> &#123;</span><br><span class="line">  assert.Equal(sutie.T(), <span class="number">5</span>, suite.Variable)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 讓go test跑這些Suite</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestExampleTestSuite</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">  suite.Run(t, <span class="built_in">new</span>(exampleTestSuite))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每個測試執行後都會呼叫這個function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(suite *ExampleTestSuite)</span> <span class="title">TearDownTest</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="go-test-指令"><a href="#go-test-指令" class="headerlink" title="go test 指令"></a>go test 指令</h3><p>go test -v wechat_test.go wechat.go 跑某一個測試的檔案，要把原檔案也寫進去</p>
+<p>go test -v  跑這個資料夾中所有測試的檔案裡的所有測試</p>
+<p>go test -run TestSuiteDaasClientImpl/Test_GetProject_Fail -v  單跑一個測試</p>
+<p>go test -run Test_SetUpMetaConfig/Test_SetUpMetaConfig_Success/Success -v 跑一個測試中的子測試 (Success)</p>
+<h3 id="goMock-套件"><a href="#goMock-套件" class="headerlink" title="goMock 套件"></a>goMock 套件</h3><p>GoMock是由Golang官方開發維護的測試框架，實現了較為完整的基於interface的Mock功能，能夠與Golang內建的testing包良好整合，也能用於其它的測試環境中</p>
+<p>GoMock測試框架包含了GoMock包和mockgen工具兩部分，其中GoMock包完成對樁物件生命週期的管理，mockgen工具用來生成interface對應的Mock類原始檔，如果檔案中沒有interface，那產出來的Mock檔就會是空的。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://goinbigdata.com/testing-go-code-with-testify/">https://goinbigdata.com/testing-go-code-with-testify/</a></p>
+<p><a href="https://hackmd.io/5FTTkQb_QCOz6j43Moimuw?view#go-mock-usage">https://hackmd.io/5FTTkQb_QCOz6j43Moimuw?view#go-mock-usage</a></p>
+]]></content>
+      <categories>
+        <category>Backend</category>
+      </categories>
+      <tags>
+        <tag>Backend</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/11/14/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -23,11 +75,5 @@
       <tags>
         <tag>Android</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>post</title>
-    <url>/2021/11/14/post/</url>
-    <content><![CDATA[<p>Hihihi</p>
-]]></content>
   </entry>
 </search>
